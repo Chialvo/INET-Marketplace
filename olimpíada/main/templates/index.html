@@ -1,135 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda en línea</title>
-    <style>
-        /* CSS styles go here */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+{% extends 'base.html' %}
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-        }
-
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 10px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        .destacados {
-            margin-bottom: 20px;
-        }
-
-        .destacados h2 {
-            color: #333;
-        }
-
-        .productos {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .producto {
-            width: 200px;
-            margin-right: 20px;
-            margin-bottom: 20px;
-        }
-
-        .producto h3 {
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-
-        .producto p {
-            margin-bottom: 10px;
-        }
-
-        .ofertas {
-            margin-bottom: 20px;
-        }
-
-        .ofertas h2 {
-            color: #333;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-    </style>
-</head>
-</head>
-<body>
-    <header>
-        <h1>Tienda en línea</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
-                <li><a href="#">Carrito</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="destacados">
-            <h2>Productos destacados</h2>
-            <div class="productos">
-                <!-- Aquí puedes agregar los productos destacados -->
-                {% for producto in productos %}
-                    {% if producto.id == 1 %}
-                        <div class="producto">
-                            <h3>{{ producto.codigo }}</h3>
-                            <p>Precio: {{ producto.precio }}</p>
-                            <a href="#">Agregar al carrito</a>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+{% block content %}
+    <section class="destacados">
+        <h2>Productos destacados</h2>
+        <div class="productos">
+            <!-- Aquí puedes agregar los productos destacados -->
+            {% for producto in productos %}
+                {% if producto.id == 1 %}
+                    <div class="producto">
+                        <h3>{{ producto.codigo }}</h3>
+                        <p>Precio: {{ producto.precio }}</p>
+                        <a href="#">Agregar al carrito</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    <section class="ofertas">
+        <h2>Ofertas especiales</h2>
+        <div class="productos">
+            <!-- Aquí puedes agregar las ofertas especiales -->
+            <div class="producto">
+                <h3>Oferta 1</h3>
+                <p>Precio: $9.99</p>
+                <a href="#">Agregar al carrito</a>
             </div>
-        </section>
-        <section class="ofertas">
-            <h2>Ofertas especiales</h2>
-            <div class="productos">
-                <!-- Aquí puedes agregar las ofertas especiales -->
-                <div class="producto">
-                    <h3>Oferta 1</h3>
-                    <p>Precio: $9.99</p>
-                    <a href="#">Agregar al carrito</a>
-                </div>
-                <div class="producto">
-                    <h3>Oferta 2</h3>
-                    <p>Precio: $14.99</p>
-                    <a href="#">Agregar al carrito</a>
-                </div>
+            <div class="producto">
+                <h3>Oferta 2</h3>
+                <p>Precio: $14.99</p>
+                <a href="#">Agregar al carrito</a>
             </div>
-        </section>
-    </main>
-    <footer>
-        <p>Todos los derechos reservados &copy; 2022</p>
-    </footer>
-</body>
-</html>
+        </div>
+    </section>
+{% endblock %}

@@ -9,5 +9,8 @@ router.register('productos', ProductoViewSet, 'productos')
 router.register('pedidos', PedidoViewSet, 'pedidos')
 
 urlpatterns = [
-    path('', index, name='index'),
+    path("", home, name="home"), 
+    path('login/', login, name='login'),
+    path('register', register, name='register'),
+    path('productos/', productos, name='productos'),
 ] + router.urls

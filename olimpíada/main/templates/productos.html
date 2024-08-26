@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Lista de Productos</h1>
+    <table>
+        <tr>
+            <th>Producto</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <!-- Add more attributes as needed -->
+        </tr>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.codigo }}</td>
+            <td>{{ producto.descripcion }}</td>
+            <td>{{ producto.precio }}</td>
+            <!-- Render more attributes as needed -->
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
