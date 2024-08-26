@@ -13,4 +13,5 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('register', register, name='register'),
     path('productos/', productos, name='productos'),
+    path('pedidos/', pedido, name='pedidos'),
 ] + router.urls
