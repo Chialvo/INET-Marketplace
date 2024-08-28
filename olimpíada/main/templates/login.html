@@ -5,6 +5,7 @@
         window.location.href = "{% url 'home' %}";
     </script>
 {% else %}
+    <!DOCTYPE html>
     <html>
     <head>
         <meta charset="UTF-8">
@@ -75,7 +76,7 @@
         <title>Marketplace</title>
     </head>
     <body>
-        <form action="" method="post" class="tarjeta">
+        <form action="{% url 'login_cliente' %}" method="post" class="tarjeta">
             {% csrf_token %}
             <div class="username" id="div-username">
                 <input type="text" name="username" id="input-username" placeholder="Nombre de Usuario" required>
@@ -86,6 +87,10 @@
             <a href="{% url 'register' %}">Registrarme</a>
             <button type="submit">Iniciar Sesión</button>
         </form>
+
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% endif %}
     </body>
     </html>
 {% endif %}

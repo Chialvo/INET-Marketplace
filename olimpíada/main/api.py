@@ -10,3 +10,8 @@ class ProductoViewSet(viewsets.ModelViewSet):
 class PedidoViewSet(viewsets.ModelViewSet):
     queryset = Pedido.objects.all()
     serializer_class = PedidoSerializer
+
+class ClienteViewSet(viewsets.ModelViewSet):
+    queryset = Cliente.objects.all()
+    serializer_class = ClienteSerializer
+    permission_classes = [permissions.IsAuthenticated]
