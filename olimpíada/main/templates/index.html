@@ -5,31 +5,32 @@
         <h2>Productos destacados</h2>
         <div class="productos">
             <!-- Aquí puedes agregar los productos destacados -->
-            {% for producto in productos %}
-                {% if producto.id == 1 %}
-                    <div class="producto">
-                        <h3>{{ producto.codigo }}</h3>
-                        <p>Precio: {{ producto.precio }}</p>
-                        <a href="#">Agregar al carrito</a>
-                    </div>
-                {% endif %}
+            {% for producto in productos|slice:":2" %}
+            <div class="producto">
+                <h3>{{ producto.codigo }}</h3>
+                <p>Precio: {{ producto.precio }}</p>
+                <a href="{% url 'pedido' %}">Agregar al carrito</a>
+            </div>
             {% endfor %}
         </div>
-    </section>
-    <section class="ofertas">
-        <h2>Ofertas especiales</h2>
-        <div class="productos">
-            <!-- Aquí puedes agregar las ofertas especiales -->
-            <div class="producto">
-                <h3>Oferta 1</h3>
-                <p>Precio: $9.99</p>
-                <a href="#">Agregar al carrito</a>
-            </div>
-            <div class="producto">
-                <h3>Oferta 2</h3>
-                <p>Precio: $14.99</p>
-                <a href="#">Agregar al carrito</a>
-            </div>
         </div>
+    </section>
+    <section class="productos">
+        <h2>Todos los productos</h2>
+        <table class="productos">
+            <tr>
+                <th>Código</th>
+                <th>Precio</th>
+                <th>Tienda</th>
+            </tr>
+            <!-- Aquí puedes agregar todos los productos -->
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.precio }}</td>
+                <td><a href="{% url 'pedido' %}">Agregar al carrito</a></td>
+            </tr>
+            {% endfor %}
+        </table>
     </section>
 {% endblock %}

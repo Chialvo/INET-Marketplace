@@ -5,25 +5,25 @@
     <table style="border-collapse: collapse;">
         <thead>
             <tr>
-                <th style="border: 1px solid black; padding: 5px;">Pedido ID</th>
-                <th style="border: 1px solid black; padding: 5px;">Cliente</th>
-                <th style="border: 1px solid black; padding: 5px;">Fecha</th>
-                <th style="border: 1px solid black; padding: 5px;">Productos</th>
+                <th>Pedido ID</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Productos</th>
             </tr>
         </thead>
         <tbody>
             {% for pedido in pedidos %}
                 <tr>
-                    <td style="border: 1px solid black; padding: 5px;">{{ pedido.id }}</td>
-                    <td style="border: 1px solid black; padding: 5px;">
+                    <td>{{ pedido.id }}</td>
+                    <td>
                         {% for cliente in clientes %}
                             {% if cliente.id == pedido.cliente %}
                                 {{ cliente.nombre }}
                             {% endif %}
                         {% endfor %}
                     </td>
-                    <td style="border: 1px solid black; padding: 5px;">{{ pedido.fecha }}</td>
-                    <td style="border: 1px solid black; padding: 5px;">
+                    <td>{{ pedido.fecha }}</td>
+                    <td>
                         <ul>
                             {% for producto in pedido.productos %}
                                 <li>{{ producto.cantidad }}x {{ producto.producto.descripcion }} - {{ producto.producto.precio }}</li>

@@ -1,47 +1,12 @@
-<!-- templates/base.html -->
+<!-- main/templates/base.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mi Sitio Web{% endblock %}</title>
-    <style>
-        /* Your CSS code goes here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        nav {
-            background-color: #333;
-            padding: 10px;
-        }
-
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 10px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        footer {
-            background-color: #333;
-            padding: 10px;
-            color: #fff;
-            text-align: center;
-        }
-    </style>
-</head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/stiles.css' %}">
 </head>
 <body>
     <!-- Navbar -->
@@ -51,7 +16,6 @@
             <li><a href="{% url 'productos' %}">Productos</a></li>
             <li><a href="{% url 'pedido' %}">Crear Pedido</a></li>
             <li><a href="{% url 'mostrarPedidos' %}">Tus Pedidos</a></li>
-
             <!-- Add more links here -->
         </ul>
     </nav>
@@ -64,9 +28,8 @@
     </div>
 
     <!-- Footer -->
-    <footer style="position: fixed; left: 0; bottom: 0; width: 100%;">
-        <p>&copy; 2024 Mi Sitio Web. All rights reserved.</p>
+    <footer>
+        <p>&copy; 2024 Mi Sitio Web. Todos los derechos reservados.</p>
     </footer>
-</body>
 </body>
 </html>
