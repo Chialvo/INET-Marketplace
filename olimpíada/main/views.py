@@ -58,3 +58,10 @@ def login_cliente(request):
             return render(request, 'login.html', {'error_message': 'Invalid username or password.'})
     else:
         return render(request, 'login.html')
+
+def mostrarPedidos(request):
+    if request.method == 'GET':
+        pedidos = Pedido.objects.all()
+        serializer = PedidoSerializer(pedidos, many = True)
+
+        return render(request, 'base.html',serializer.data)

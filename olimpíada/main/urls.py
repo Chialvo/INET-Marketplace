@@ -17,4 +17,5 @@ urlpatterns = [
     path('pedidos/', pedidos, name='pedidos'),
     path('agregarAlCarrito/<int:id>/', agregarAlCarrito, name='agregarAlCarrito'),
     path('login_cliente/', login_cliente, name='login_cliente'),  # Ensure this is correct
+    path('mostrarPedidos/', mostrarPedidos, name='mostrarPedidos'),
 ] + router.urls
