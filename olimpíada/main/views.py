@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as auth_login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Producto, Pedido
+from .models import *
 from .serializers import ProductoSerializer, PedidoSerializer
 from django.shortcuts import render
 from .forms import *
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 #@login_required(login_url='login')
 def home(request):
@@ -30,13 +33,6 @@ def pedido(request):
     productos = Producto.objects.order_by('codigo')
     serializer = ProductoSerializer(productos, many=True)
     return render(request, 'pedido.html', {'productos': serializer.data})
-
-@login_required(login_url='login') 
-def pedidos(request):
-    cliente_id = request.GET.get('cliente_id')  # Get the client ID from the request parameters
-    pedidos = Pedido.objects.filter(cliente_id=cliente_id)  # Filter the pedidos based on the client ID
-    serializer = PedidoSerializer(pedidos, many=True)
-    return render(request, 'pedidos.html', {'pedidos': serializer.data})
 
 @login_required(login_url='login')
 def agregarAlCarrito(request, id):
@@ -64,22 +60,18 @@ def login_cliente(request):
 def mostrarPedidos(request):
     if request.method == 'GET':
         pedidos = Pedido.objects.all()
-        serializer = PedidoSerializer(pedidos, many = True)
-
+        serializer = PedidoSerializer(pedidos, many=True)
+        clientes = Cliente.objects.all()  # Assuming you have a Cliente model
+        
         context = {
-            'pedidos': serializer.data
+            'pedidos': serializer.data,
+            'clientes': clientes,
         }
 
-        return render(request, 'mostrar_pedidos.html',context)
-
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from .models import Pedido, Producto, PedidoProducto
+        return render(request, 'mostrar_pedidos.html', context)
 
 @csrf_exempt
 def crear_pedido(request):
-    print("entree")
     if request.method == 'POST':
         data = json.loads(request.body)
         ids = data.get('ids', '').split(',')

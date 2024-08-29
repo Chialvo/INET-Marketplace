@@ -35,6 +35,9 @@
 
             if (response.ok) {
                 alert('Pedido creado');
+                carrito.length = 0;
+                ids.length = 0;
+                actualizarCarrito();
             } else {
                 console.error('Error al crear el pedido');
             }
