@@ -1,60 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <script>
+<script>
+    const carrito = [];
+    const ids = [];
 
-        function agregarAlCarrito(codigo, id) {
-            // Obtener el producto seleccionado
-            console.log(codigo);
-            // Crear un elemento de lista para el producto
+    function agregarAlCarrito(codigo, id) {
+        carrito.push(codigo);
+        ids.push(id);
+        actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+        const pedidoLista = document.getElementById('pedido-lista');
+        pedidoLista.innerHTML = '';
+        carrito.forEach(producto => {
             const li = document.createElement('li');
-            li.textContent = codigo;
-            // Obtener el carrito
-            const carrito = document.getElementById('pedido-lista');
-            // Verificar si el carrito existe
-            if (carrito) {
-            // Agregar el producto al carrito
-            carrito.appendChild(li);
-            } else {
-            console.error('El elemento con id "pedido-lista" no existe');
-            }
-            
-            // Agregar el id del producto a la lista de ids
-            const ids = document.getElementById('ids-lista');
-            // Verificar si la lista de ids existe
-            if (ids) {
-            const idLi = document.createElement('li');
-            idLi.textContent = id;
-            ids.appendChild(idLi);
-            } else {
-            console.error('El elemento con id "ids-lista" no existe');
-            }
-            console.log(ids);
-        }
-    
-        function crearPedido() {
-            // Aquí puedes implementar la lógica para crear el pedido
-            alert('Pedido creado');
-        }
-    </script>
+            li.textContent = producto;
+            pedidoLista.appendChild(li);
+        });
+    }
 
-    <!-- Aquí va el contenido específico de la página pedido.html -->
-    <h1>Listado de productos:</h1>
-    <ul>
-        {% for producto in productos %}
-            <li>
-                {{ producto.codigo }}
-                <button class="agregar-btn" onclick="agregarAlCarrito('{{ producto.codigo }}', '{{ producto.id }}')">Agregar</button>
-            </li>
-            </li>
-        {% endfor %}
-    </ul>
-    <h2>Tu pedido:</h2>
-    <ul id="pedido-lista">
-        <!-- Aquí se mostrarán los productos agregados al pedido -->
-        {% for producto in carrito %}
-            <li>{{ producto.codigo }}</li>
-        {% endfor %}
-    </ul>
-    <button class="crear-pedido-btn" onclick="crearPedido()">Crear Pedido</button>
+    async function crearPedido() {
+        const idString = ids.join(',');
+        try {
+            const response = await fetch('/crear_pedido/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({ ids: idString })
+            });
+
+            if (response.ok) {
+                alert('Pedido creado');
+            } else {
+                console.error('Error al crear el pedido');
+            }
+        } catch (error) {
+            console.error('Error al crear el pedido', error);
+        }
+    }
+</script>
+
+<h1>Listado de productos:</h1>
+<ul>
+    {% for producto in productos %}
+        <li>
+            {{ producto.codigo }}
+            <button class="agregar-btn" onclick="agregarAlCarrito('{{ producto.codigo }}', '{{ producto.id }}')">Agregar</button>
+        </li>
+    {% endfor %}
+</ul>
+<h2>Tu pedido:</h2>
+<ul id="pedido-lista"></ul>
+<button class="crear-pedido-btn" onclick="crearPedido()">Crear Pedido</button>
 {% endblock %}

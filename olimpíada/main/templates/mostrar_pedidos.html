@@ -1,21 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Listado de Pedidos</h1>
-    <ul>
-        {% for pedido in pedidos %}
-            <li>
-                <strong>Pedido ID:</strong> {{ pedido.id }} <br>
-                <strong>Cliente:</strong> {{ pedido.cliente }} <br>
-                <strong>Fecha:</strong> {{ pedido.fecha }} <br>
-                <strong>Total:</strong> {{ pedido.total }} <br>
-                <strong>Productos:</strong>
-                <ul>
-                    {% for producto in pedido.productos %}
-                        <li>{{ producto.cantidad }}x {{ producto.producto.descripcion }} - {{ producto.producto.precio }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
+    <h1 style="color: gray;">Listado de Pedidos</h1>
+    <table style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; padding: 5px;">Pedido ID</th>
+                <th style="border: 1px solid black; padding: 5px;">Cliente</th>
+                <th style="border: 1px solid black; padding: 5px;">Fecha</th>
+                <th style="border: 1px solid black; padding: 5px;">Total</th>
+                <th style="border: 1px solid black; padding: 5px;">Productos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pedido in pedidos %}
+                <tr>
+                    <td style="border: 1px solid black; padding: 5px;">{{ pedido.id }}</td>
+                    <td style="border: 1px solid black; padding: 5px;">{{ pedido.cliente }}</td>
+                    <td style="border: 1px solid black; padding: 5px;">{{ pedido.fecha }}</td>
+                    <td style="border: 1px solid black; padding: 5px;">{{ pedido.total }}</td>
+                    <td style="border: 1px solid black; padding: 5px;">
+                        <ul>
+                            {% for producto in pedido.productos %}
+                                <li>{{ producto.cantidad }}x {{ producto.producto.descripcion }} - {{ producto.producto.precio }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

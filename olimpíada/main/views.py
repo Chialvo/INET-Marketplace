@@ -71,3 +71,28 @@ def mostrarPedidos(request):
         }
 
         return render(request, 'mostrar_pedidos.html',context)
+
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import Pedido, Producto, PedidoProducto
+
+@csrf_exempt
+def crear_pedido(request):
+    print("entree")
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        ids = data.get('ids', '').split(',')
+        productos = Producto.objects.filter(id__in=ids)
+        
+        if not productos.exists():
+            return JsonResponse({'status': 'error', 'message': 'Productos no encontrados'}, status=400)
+        
+        pedido = Pedido.objects.create(cliente=request.user)
+        
+        for producto in productos:
+            PedidoProducto.objects.create(pedido=pedido, producto=producto, cantidad=1)  # Ajusta la cantidad según sea necesario
+        
+        return JsonResponse({'status': 'success', 'message': 'Pedido creado'})
+    
+    return JsonResponse({'status': 'error', 'message': 'Método no permitido'}, status=405)
