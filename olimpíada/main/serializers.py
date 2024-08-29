@@ -11,7 +11,7 @@ class PedidoProductoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PedidoProducto
-        fields = ['producto', 'cantidad']
+        fields = '__all__'
 
 class PedidoSerializer(serializers.ModelSerializer):
     productos = PedidoProductoSerializer(source='pedidoproducto_set', many=True)

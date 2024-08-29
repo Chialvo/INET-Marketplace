@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Producto, Pedido
 from .serializers import ProductoSerializer, PedidoSerializer
+from django.shortcuts import render
+from .forms import *
 
 #@login_required(login_url='login')
 def home(request):
@@ -68,4 +70,4 @@ def mostrarPedidos(request):
             'pedidos': serializer.data
         }
 
-        return render(request, 'pedidos.html',context)
+        return render(request, 'mostrar_pedidos.html',context)
