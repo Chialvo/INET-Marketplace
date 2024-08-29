@@ -4,7 +4,18 @@
     <h1>Listado de Pedidos</h1>
     <ul>
         {% for pedido in pedidos %}
-            <li>{{ pedido }}</li>
+            <li>
+                <strong>Pedido ID:</strong> {{ pedido.id }} <br>
+                <strong>Cliente:</strong> {{ pedido.cliente }} <br>
+                <strong>Fecha:</strong> {{ pedido.fecha }} <br>
+                <strong>Total:</strong> {{ pedido.total }} <br>
+                <strong>Productos:</strong>
+                <ul>
+                    {% for producto in pedido.productos %}
+                        <li>{{ producto.cantidad }}x {{ producto.producto.descripcion }} - {{ producto.producto.precio }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

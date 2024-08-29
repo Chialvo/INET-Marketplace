@@ -14,7 +14,7 @@ class PedidoProductoSerializer(serializers.ModelSerializer):
         fields = ['producto', 'cantidad']
 
 class PedidoSerializer(serializers.ModelSerializer):
-    productos = PedidoProductoSerializer(many=True)
+    productos = PedidoProductoSerializer(source='pedidoproducto_set', many=True)
 
     class Meta:
         model = Pedido

@@ -64,4 +64,8 @@ def mostrarPedidos(request):
         pedidos = Pedido.objects.all()
         serializer = PedidoSerializer(pedidos, many = True)
 
-        return render(request, 'base.html',serializer.data)
+        context = {
+            'pedidos': serializer.data
+        }
+
+        return render(request, 'pedidos.html',context)
