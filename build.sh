@@ -2,7 +2,7 @@
 # exit on error
 set -o errexit
 
-cd olimpíada/
+cd olimpiada/
 
 pip install -r requirements.txt
 
