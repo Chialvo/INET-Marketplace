@@ -25,9 +25,6 @@ def productos(request):
 def login_view(request):
     return render(request, "login.html")
 
-def register(request):
-    return render(request, "register.html")
-
 @login_required(login_url='login')
 def pedido(request):
     productos = Producto.objects.order_by('codigo')
@@ -88,3 +85,14 @@ def crear_pedido(request):
         return JsonResponse({'status': 'success', 'message': 'Pedido creado'})
     
     return JsonResponse({'status': 'error', 'message': 'Método no permitido'}, status=405)
+
+def register(request):
+    if request.method == 'POST':
+        form = ClienteRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirect to the login page after successful registration
+    else:
+        form = ClienteRegistrationForm()
+
+    return render(request, 'register.html', {'form': form})
