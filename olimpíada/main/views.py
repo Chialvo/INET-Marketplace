@@ -10,6 +10,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render, get_object_or_404, redirect
 
 @login_required(login_url='login')
 def home(request):
@@ -102,5 +103,11 @@ def superuser_required(user):
     return user.is_superuser
 
 @user_passes_test(superuser_required)
-def superuser_only_view(request):
-    return render(request, 'superuser_only.html')
+def productos_eliminar(request, id_producto):
+    producto = get_object_or_404(Producto, id=id_producto)
+
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('producto_list')  # Redirect to the product list page after deletion
+
+    return render(request, 'delete_confirmar.html', {'producto': producto})

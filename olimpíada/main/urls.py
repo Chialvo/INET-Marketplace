@@ -20,6 +20,6 @@ urlpatterns = [
     path('mostrarPedidos/', mostrarPedidos, name='mostrarPedidos'),
     path('crear_pedido/', crear_pedido, name='crear_pedido'),
     path('register/', register, name='register'),    
-    path('superuser-page/', superuser_only_view, name='superuser_page'),
+    path('productos_eliminar/<int:id_producto>/', productos_eliminar, name='delete_producto'),
     path('logout/', auth_views.LogoutView.as_view(template_name='logout.html'), name='logout'),
 ] + router.urls

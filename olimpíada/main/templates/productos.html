@@ -7,6 +7,10 @@
             <th>Producto</th>
             <th>Descripcion</th>
             <th>Precio</th>
+            {% if request.user.is_superuser %}
+                {% csrf_token %}
+                <th>Eliminar</th>
+            {% endif %}
             <!-- Add more attributes as needed -->
         </tr>
         {% for producto in productos %}
@@ -14,6 +18,15 @@
             <td>{{ producto.codigo }}</td>
             <td>{{ producto.descripcion }}</td>
             <td>{{ producto.precio }}</td>
+
+            {% if request.user.is_superuser %}
+                <td>
+                    <form action="{% url 'productos_eliminar' producto.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            {% endif %}
             <!-- Render more attributes as needed -->
         </tr>
         {% endfor %}
