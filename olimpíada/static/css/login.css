@@ -1,17 +1,26 @@
+/* Estilos generales */
 body {
     background-color: #f2f2f2;
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
+/* Estilos para la tarjeta de login */
 .tarjeta {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 300px;
-    margin: 0 auto;
+    box-sizing: border-box;
 }
 
+/* Estilos para los campos de texto y contraseña */
 .tarjeta input[type="text"],
 .tarjeta input[type="password"] {
     width: 100%;
@@ -19,8 +28,10 @@ body {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    box-sizing: border-box;
 }
 
+/* Estilos para el botón de submit */
 .tarjeta button[type="submit"] {
     background-color: #717171;
     color: white;
@@ -29,19 +40,32 @@ body {
     border-radius: 3px;
     cursor: pointer;
     font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
+.tarjeta button[type="submit"]:hover {
+    background-color: #5a5a5a;
+}
+
+/* Estilos para los enlaces */
 .tarjeta a {
     color: #717171;
     text-decoration: none;
     font-size: 14px;
     margin-bottom: 10px;
     display: block;
+    text-align: center;
 }
 
+.tarjeta a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para las etiquetas */
 .tarjeta label {
     color: red;
     font-size: 14px;
     display: block;
     margin-top: 10px;
-}
+}   
