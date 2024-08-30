@@ -9,8 +9,9 @@ from .forms import *
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import user_passes_test
 
-#@login_required(login_url='login')
+@login_required(login_url='login')
 def home(request):
     productos = Producto.objects.all()
     serializer = ProductoSerializer(productos, many=True)
@@ -46,8 +47,8 @@ def login_cliente(request):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            auth_login(request, user)  # Correctly call the login function
-            return redirect('home')  # Redirect to a success page.
+            auth_login(request, user)
+            return redirect('home')
         else:
             messages.error(request, 'Invalid username or password.')
             return render(request, 'login.html', {'error_message': 'Invalid username or password.'})
@@ -58,7 +59,7 @@ def mostrarPedidos(request):
     if request.method == 'GET':
         pedidos = Pedido.objects.all()
         serializer = PedidoSerializer(pedidos, many=True)
-        clientes = Cliente.objects.all()  # Assuming you have a Cliente model
+        clientes = Cliente.objects.all() 
         
         context = {
             'pedidos': serializer.data,
@@ -91,8 +92,15 @@ def register(request):
         form = ClienteRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')  # Redirect to the login page after successful registration
+            return redirect('login')
     else:
         form = ClienteRegistrationForm()
 
     return render(request, 'register.html', {'form': form})
+
+def superuser_required(user):
+    return user.is_superuser
+
+@user_passes_test(superuser_required)
+def superuser_only_view(request):
+    return render(request, 'superuser_only.html')
