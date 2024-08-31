@@ -11,7 +11,6 @@
                 {% csrf_token %}
                 <th>Eliminar</th>
             {% endif %}
-            <!-- Add more attributes as needed -->
         </tr>
         {% for producto in productos %}
         <tr>
@@ -25,7 +24,6 @@
                         <button type="submit">Eliminar</button>
                 </td>
             {% endif %}
-            <!-- Render more attributes as needed -->
         </tr>
         {% endfor %}
     </table>

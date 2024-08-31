@@ -4,7 +4,6 @@
     <section class="destacados">
         <h2>Productos destacados</h2>
         <div class="productos">
-            <!-- Aquí puedes agregar los productos destacados -->
             {% for producto in productos|slice:":2" %}
             <div class="producto">
                 <h3>{{ producto.codigo }}</h3>
@@ -23,7 +22,6 @@
                 <th>Precio</th>
                 <th>Tienda</th>
             </tr>
-            <!-- Aquí puedes agregar todos los productos -->
             {% for producto in productos %}
             <tr>
                 <td>{{ producto.codigo }}</td>
