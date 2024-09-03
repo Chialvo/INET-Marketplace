@@ -10,6 +10,7 @@ router.register('pedidos', PedidoViewSet, 'pedidos')
 router.register('clientes', ClienteViewSet, 'clientes')
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('productos/', productos, name='productos'),
     path('login/', login_view, name='login'),
