@@ -7,10 +7,6 @@
             <th>Producto</th>
             <th>Descripcion</th>
             <th>Precio</th>
-            {% if request.user.is_superuser %}
-                {% csrf_token %}
-                <th>Eliminar</th>
-            {% endif %}
         </tr>
         {% for producto in productos %}
         <tr>
