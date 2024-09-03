@@ -15,19 +15,12 @@
             <li><a href="{% url 'pedido' %}">Crear Pedido</a></li>
             <li><a href="{% url 'mostrarPedidos' %}">Tus Pedidos</a></li>
             {% if user.is_authenticated %}
-                <li>
-                    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" style="float: right;">
-                            Cerrar sesión
-                        </button>
-                    </form>
-                </li>
+                <li style="float: right;"><a href="{% url 'logout' %}">Cerrar sesión</a></li>
                 {% if user.is_staff %}
                     <li style="float: right;"><a href="{% url 'admin:index' %}">Admin Dashboard</a></li>
                 {% endif %}
             {% else %}
-                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                <li style="float: right;"><a href="{% url 'login' %}">Iniciar sesión</a></li>
             {% endif %}
         </ul>
     </nav>

@@ -12,4 +12,4 @@ python manage.py migrate
 
 #python manage.py runserver
 
-python create_superuser.py
+#python create_superuser.py
