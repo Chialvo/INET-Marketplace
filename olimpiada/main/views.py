@@ -56,6 +56,7 @@ def login_cliente(request):
     else:
         return render(request, 'login.html')
 
+@login_required(login_url='login')
 def mostrarPedidos(request):
     if request.method == 'GET':
         pedidos = Pedido.objects.all()
@@ -69,6 +70,7 @@ def mostrarPedidos(request):
 
         return render(request, 'mostrar_pedidos.html', context)
 
+@login_required(login_url='login')
 @csrf_exempt
 def crear_pedido(request):
     if request.method == 'POST':
@@ -101,13 +103,3 @@ def register(request):
 
 def superuser_required(user):
     return user.is_superuser
-
-@user_passes_test(superuser_required)
-def productos_eliminar(request, id_producto):
-    producto = get_object_or_404(Producto, id=id_producto)
-
-    if request.method == 'POST':
-        producto.delete()
-        return redirect('producto_list')  # Redirect to the product list page after deletion
-
-    return render(request, 'delete_confirmar.html', {'producto': producto})
